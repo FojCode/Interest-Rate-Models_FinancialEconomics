@@ -1,1 +1,25 @@
-# Spot rate
+# Spot rate of a zero coupon bond 
+def calculate_spot_rate(bond_price, time_to_maturity):
+    """
+    Calculate the spot rate of a zero-coupon bond.
+
+    Parameters:
+    bond_price (float): The current price of the bond.
+    time_to_maturity (float): The time to maturity in years.
+
+    Returns:
+    float: The spot rate as a decimal.
+    """
+    
+    face_value = 100
+    spot_rate = (face_value / bond_price) ** (1 / time_to_maturity) - 1
+    return spot_rate # The formula for the spot rate is: (Face Value / Bond Price)^(1/time_to_maturity) - 1
+
+# Example:
+bond_price = 95  # Example bond price in Rand
+time_to_maturity = 2  # Time to maturity in years
+spot_rate = calculate_spot_rate(bond_price, time_to_maturity)
+print(f"The spot rate is: {spot_rate:.2%}")
+
+# instantaneous forward rate of a zero coupon bond 
+
