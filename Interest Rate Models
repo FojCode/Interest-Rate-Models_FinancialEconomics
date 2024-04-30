@@ -23,3 +23,31 @@ print(f"The spot rate is: {spot_rate:.2%}")
 
 # instantaneous forward rate of a zero coupon bond 
 
+import math
+
+def calculate_instantaneous_forward_rate(bond_price, time_to_maturity):
+    """
+    Calculate the instantaneous forward rate of a zero-coupon bond.
+
+    Parameters:
+    bond_price (float): The current price of the bond.
+    time_to_maturity (float): The time to maturity in years.
+
+    Returns:
+    float: The instantaneous forward rate.
+    """
+    
+    if bond_price <= 0:
+        raise ValueError("Bond price must be greater than 0") # Ensure bond_price is not zero to avoid division by zero error
+    instantaneous_forward_rate = -math.log(bond_price) / time_to_maturity # The formula for the instantaneous forward rate is: -ln(Bond Price) / time_to_maturity
+    
+    return instantaneous_forward_rate
+
+bond_price = 95  # Example bond price in R
+time_to_maturity = 2  # Time to maturity in years
+forward_rate = calculate_instantaneous_forward_rate(bond_price, time_to_maturity)
+print(f"The instantaneous forward rate is: {forward_rate:.2%}")
+
+# Vasicek model - instantaneous forward rate 
+
+
