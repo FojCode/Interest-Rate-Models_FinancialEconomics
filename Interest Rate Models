@@ -82,4 +82,38 @@ forward_rate = vasicek_instantaneous_forward_rate(r0, k, theta, sigma, t)
 print(f"The instantaneous forward rate is: {forward_rate:.2%}")
 
 # Vasicek model - price of a zero-coupon bond
+import math
+
+def vasicek_bond_price(r, k, theta, sigma, t):
+    """
+    Calculate the price of a zero-coupon bond using the Vasicek model.
+
+    Parameters:
+    r (float): The current short-term interest rate.
+    k (float): The speed of reversion to the mean.
+    theta (float): The long-term mean rate.
+    sigma (float): The volatility of the interest rate.
+    t (float): The time to maturity in years.
+
+    Returns:
+    float: The price of the bond.
+    """
+    
+    b_t = (1 - math.exp(-k * t)) / k # Calculate b(t)
+
+    a_t = ((theta - (sigma**2) / (2 * k**2)) * (b_t - t)) - ((sigma**2) / (4 * k)) * b_t**2 # Calculate a(t)
+    
+    bond_price = math.exp(-(a_t + b_t * r)) # Calculate the bond price
+    
+    return bond_price
+
+# Example:
+r = 0.10  # Current short-term interest rate
+k = 0.5    # Speed of reversion
+theta = 0.08  # Long-term mean rate
+sigma = 0.05  # Volatility
+t = 1  # Time to maturity in years
+
+price = vasicek_bond_price(r, k, theta, sigma, t)
+print(f"The price of the zero-coupon bond is: ${price:.2f}")
 
