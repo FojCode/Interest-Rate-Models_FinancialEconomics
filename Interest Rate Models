@@ -50,4 +50,36 @@ print(f"The instantaneous forward rate is: {forward_rate:.2%}")
 
 # Vasicek model - instantaneous forward rate 
 
+import math
+
+def vasicek_instantaneous_forward_rate(r0, k, theta, sigma, t):
+    """
+    Calculate the instantaneous forward rate using the Vasicek model.
+
+    Parameters:
+    r0 (float): The current short-term interest rate.
+    k (float): The speed of reversion to the mean.
+    theta (float): The long-term mean rate.
+    sigma (float): The volatility of the interest rate.
+    t (float): The time to maturity in years.
+
+    Returns:
+    float: The instantaneous forward rate.
+    """
+    b = (1 - math.exp(-k * t)) / k # The Vasicek model formula for the instantaneous forward rate
+    forward_rate = r0 * math.exp(-k * t) + theta * (1 - math.exp(-k * t)) - (sigma**2 / (2 * k**2)) * (1 - math.exp(-2 * k * t))
+    
+    return forward_rate
+
+# Example:
+r0 = 0.10  # Current short-term interest rate
+k = 0.5    # Speed of reversion
+theta = 0.08  # Long-term mean rate
+sigma = 0.04  # Volatility
+t = 1  # Time to maturity in years
+
+forward_rate = vasicek_instantaneous_forward_rate(r0, k, theta, sigma, t)
+print(f"The instantaneous forward rate is: {forward_rate:.2%}")
+
+# Vasicek model - price of a zero-coupon bond
 
